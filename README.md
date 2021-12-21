@@ -1,4 +1,4 @@
-# 3D Visualization of Gradient Surface Metrics
+# 3D Visualization of Gradient Surface Metrics in R
 
 
 ## BACKGROUND AND PURPOSE
