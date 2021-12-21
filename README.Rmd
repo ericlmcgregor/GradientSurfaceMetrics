@@ -53,7 +53,8 @@ was very similar to one of the chosen variables in terms of how it relates to
 patch-based metrics, but was a heavier lift in terms of comprehension, so "surface
 skewness" was used instead.
 
-
+Note: only a single variable and scale are being calculated to keep the size of the
+markdown document small.
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 #Load libraries
@@ -255,9 +256,9 @@ PARA_AM (Area-weighted perimeter area ratio)." (Kedron & Frazier 2019)
 ```{r, message=FALSE, warning=FALSE}
 #Let's start with an 11x11 moving window (330m on a side).
 #Each plot image is 330 X 330 meters.
-ssk330 <- calcMet(raster = fcov, metric = "ssk", window = 11, nclasses = 5,
-               nsamples = 3)
-rglwidget()
+# ssk330 <- calcMet(raster = fcov, metric = "ssk", window = 11, nclasses = 5,
+#                nsamples = 3)
+# rglwidget()
 
 ```
 
@@ -286,17 +287,17 @@ that Sdq correlated with edge density (0.58) and landscape shape index (0.41).
 ### Sdq - 330 meter scale
 ```{r, message=FALSE, warning=FALSE}
 #330 meter (11 x 11 pixel) moving window
-sdq <- calcMet(raster = fcov, metric = "sdq", window = 11, nclasses = 5,
-               nsamples = 3)
-rglwidget()
+# sdq <- calcMet(raster = fcov, metric = "sdq", window = 11, nclasses = 5,
+#                nsamples = 3)
+# rglwidget()
 ```
 
 ### Sdq - 1050 meter scale
 ```{r, message=FALSE, warning=FALSE}
 #1050 meter (35 x 35 pixel) moving window
-sdq <- calcMet(raster = fcov, metric = "sdq", window = 35, nclasses = 5,
-               nsamples = 3)
-rglwidget()
+# sdq <- calcMet(raster = fcov, metric = "sdq", window = 35, nclasses = 5,
+#                nsamples = 3)
+# rglwidget()
 ```
 
 ## General Thoughts and Comments
