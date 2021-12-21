@@ -1,17 +1,5 @@
 # 3D Visualization of Gradient Surface Metrics
----
-title: "Surface Metrics Testing"
-author: "Eric McGregor"
-date: "4/5/2021"
-output: 
-  html_document:
-    keep_md: true
----
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-options(rgl.useNULL = TRUE)
-```
 
 ## BACKGROUND AND PURPOSE
 Landscape ecologists have long understood that ecological processes can 
@@ -55,7 +43,7 @@ patch-based metrics, but was a heavier lift in terms of comprehension, so "surfa
 skewness" was used instead.
 
 
-```{r, results='hide', message=FALSE, warning=FALSE}
+```r
 #Load libraries
 library(raster)
 library(rgdal)
@@ -69,7 +57,7 @@ library(RColorBrewer)
 ## Load and Prepare % Live Forest Data
 Let's load the % live forest data, reproject it to an equal area projection, 
 crop it to reduce the amount of data we're working with, and visualize it. 
-```{r, message=FALSE, warning=FALSE}
+```r
 #Set working directory
 setwd("C:/Users/ericm/Documents/ForGithub/GradientSurfaceMetrics")
 
@@ -92,7 +80,7 @@ rasterVis::levelplot(fcov, margin = F, par.settings = forestTheme,
                      ylab = NULL, xlab = NULL,
                      main = '% Live Forest')
 ```
-
+![ForestCover](https://github.com/ericlmcgregor/GradientSurfaceMetrics/blob/main/thumbnails/ForestCover.JPG)
 
 ## A note on visualizations: 
 Because surface metrics use a 3-Dimensional model of the variable of interest 
@@ -104,7 +92,7 @@ should be able to click and hold down to manipulate the angle. You'll notice the
 represents % forest cover, x and y are spatial coordinates. Red to Green represents
 low to high % forest cover values.
 
-```{r, message=FALSE, warning=FALSE}
+```r
 open3d()
 breaks <- c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
 plot3D(fcov, lit = FALSE, specular = "black", shininess = 5, at = breaks,
@@ -113,6 +101,7 @@ decorate3d(main = "%Live Forest", axes = T, box = T, xlab = "", ylab = "", zlab=
 #To make interactive plots in RMarkdown
 rglwidget()
 ```
+![ForestCover3D](https://github.com/ericlmcgregor/GradientSurfaceMetrics/blob/main/thumbnails/ForestCover3D.JPG)
 
 ## Define a function to calculate and plot surface metrics
 The function will:
@@ -122,7 +111,7 @@ stratified sample (nsamples). We will extract the surface metric values and visu
 with a 3D model of live forest. The purpose is to be able to see how surface metric
 values across strata compare with the specific landscapes for which they are calculated. 
 
-```{r}
+```r
 calcMet <- function(raster, metric, window, nclasses, nsamples){
   #remove trend in data
   rt <- remove_plane(fcov)
@@ -253,7 +242,7 @@ area, an observation supported by the positive correlation [with]the shape metri
 PARA_AM (Area-weighted perimeter area ratio)." (Kedron & Frazier 2019)
 
 ### Ssk - 330 meter scale
-```{r, message=FALSE, warning=FALSE}
+```r
 #Let's start with an 11x11 moving window (330m on a side).
 #Each plot image is 330 X 330 meters.
 ssk330 <- calcMet(raster = fcov, metric = "ssk", window = 11, nclasses = 5,
@@ -261,9 +250,11 @@ ssk330 <- calcMet(raster = fcov, metric = "ssk", window = 11, nclasses = 5,
 rglwidget()
 
 ```
+![SSK](https://github.com/ericlmcgregor/GradientSurfaceMetrics/blob/main/thumbnails/SSK.JPG)
 
+### The remainder of the metrics were not calculated and visualized for the purposes of this markdown document. 
 ### Ssk - 1050 meter scale
-```{r, message=FALSE, warning=FALSE}
+```r
 #Let's also look at 1050 meter scale, a 35 x 35 pixel window
 #Each plot is 1050 x 1050 meters. 
 ssk1050 <- calcMet(raster = fcov, metric = "ssk", window = 35, nclasses = 5,
@@ -285,7 +276,7 @@ Values increase as local slope variability increases. Kedron et al. (2018) found
 that Sdq correlated with edge density (0.58) and landscape shape index (0.41).
 
 ### Sdq - 330 meter scale
-```{r, message=FALSE, warning=FALSE}
+```r
 #330 meter (11 x 11 pixel) moving window
 sdq <- calcMet(raster = fcov, metric = "sdq", window = 11, nclasses = 5,
                nsamples = 3)
@@ -293,7 +284,7 @@ rglwidget()
 ```
 
 ### Sdq - 1050 meter scale
-```{r, message=FALSE, warning=FALSE}
+```r
 #1050 meter (35 x 35 pixel) moving window
 sdq <- calcMet(raster = fcov, metric = "sdq", window = 35, nclasses = 5,
                nsamples = 3)
