@@ -53,8 +53,6 @@ was very similar to one of the chosen variables in terms of how it relates to
 patch-based metrics, but was a heavier lift in terms of comprehension, so "surface
 skewness" was used instead.
 
-Note: only a single variable and scale are being calculated to keep the size of the
-markdown document small.
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 #Load libraries
